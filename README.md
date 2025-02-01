@@ -91,4 +91,4 @@
 
 <h2>Conclusion</h2>
 <p>Integrating osTicket with Active Directory provides a seamless ticketing solution for IT support. With AD authentication, users can log in with their existing credentials, making the system more secure and efficient.</p>
-<p>🚀 <strong>Now you're ready to manage IT support tickets like a pro!</strong></p>
+

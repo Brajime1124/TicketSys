@@ -102,4 +102,4 @@ By integrating **osTicket** with **Active Directory**, you now have a fully func
 
 ---
 
-This guide serves as both a **learning tool** and a **practical project** to showcase your IT skills. If you found this helpful, feel free to **fork the repository** and build upon it! 🚀  
+This guide serves as both a **learning tool** and a **practical project** to showcase my IT skills.🚀  

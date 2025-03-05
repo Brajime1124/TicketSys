@@ -1,94 +1,105 @@
-<header style="background-color: #333; color: white; padding: 20px; text-align: center;">
-    <h1>Active Directory Home Lab & osTicket Integration</h1>
-    <p style="font-size: 1.2em;">A step-by-step guide to setting up an Active Directory home lab and integrating it with osTicket for IT support ticketing.</p>
-</header>
+# Active Directory Home Lab & osTicket Integration  
+A step-by-step guide to setting up an **Active Directory Home Lab** and integrating it with **osTicket**, a ticketing system commonly used in IT support environments. By the end of this guide, you'll have a functional help desk system where users can submit support requests, and IT staff can manage and resolve issues efficiently.
 
-<h2>Prerequisites</h2>
-<ul>
-    <li>A computer with enough resources (at least 16GB RAM, SSD recommended)</li>
-    <li><strong>Virtualization software</strong> (VMware Workstation, VirtualBox, or Hyper-V)</li>
-    <li><strong>Windows Server ISO</strong> (2019 or 2022) – available from Microsoft’s evaluation site</li>
-    <li><strong>Windows 10/11 ISO</strong> (for client machines)</li>
-</ul>
+---
 
-<h2>Step 1: Set Up the Virtualization Environment</h2>
-<ol>
-    <li>Install your preferred virtualization software.</li>
-    <li>Create a new <strong>Virtual Machine (VM)</strong> for Windows Server:
-        <ul>
-            <li>Allocate at least <strong>4GB RAM, 2 CPU cores</strong></li>
-            <li>Set the virtual disk to <strong>50GB</strong> or more</li>
-            <li>Mount the <strong>Windows Server ISO</strong> and begin installation</li>
-        </ul>
-    </li>
-    <li>Create additional VMs for Windows 10/11 clients following similar steps.</li>
-</ol>
+## 🛠 Prerequisites  
+Before we begin, ensure you have the following:  
 
-<h2>Step 2: Install Windows Server and Configure Basic Settings</h2>
-<ol>
-    <li>Boot the server VM and install <strong>Windows Server</strong>.</li>
-    <li>Set a <strong>strong administrator password</strong>.</li>
-    <li>Assign a <strong>static IP address</strong>:
-        <ul>
-            <li>Open <strong>Network and Sharing Center</strong> → Change adapter settings.</li>
-            <li>Configure the Ethernet adapter with a manual IP (e.g., <code>192.168.1.10</code> for the server).</li>
-        </ul>
-    </li>
-    <li>Rename the server to something meaningful (e.g., <code>DC01</code>).</li>
-</ol>
+- A computer with at least **16GB RAM** (an SSD is highly recommended for better performance).  
+- **Virtualization software** (VMware Workstation, VirtualBox, or Hyper-V).  
+- **Windows Server ISO** (2019 or 2022) – available from Microsoft’s evaluation site.  
+- **Windows 10/11 ISO** (for client machines).  
 
-<h2>Step 3: Install Active Directory Domain Services (AD DS)</h2>
-<ol>
-    <li>Open <strong>Server Manager</strong> and select <strong>Add Roles and Features</strong>.</li>
-    <li>Choose <strong>Active Directory Domain Services (AD DS)</strong> and install it.</li>
-    <li>After installation, <strong>Promote the server to a domain controller</strong>:
-        <ul>
-            <li>Select <strong>Add a new forest</strong> (e.g., <code>MyLab.local</code>).</li>
-            <li>Set a <strong>Directory Services Restore Mode (DSRM) password</strong>.</li>
-            <li>Complete the wizard and restart the server.</li>
-        </ul>
-    </li>
-</ol>
+---
 
-<h2>Step 4: Configure Active Directory and DNS</h2>
-<p>Once the server is rebooted:</p>
-<ul>
-    <li>Open <strong>Active Directory Users and Computers (ADUC)</strong>.</li>
-    <li>Create <strong>Organizational Units (OUs)</strong> to structure users and computers.</li>
-    <li>Create test <strong>user accounts</strong>.</li>
-</ul>
+## 🚀 Step 1: Setting Up the Virtualization Environment  
+To start, we'll create virtual machines (VMs) for both **Windows Server** and **Windows Client**.  
 
-<h1>Integrating osTicket with Active Directory</h1>
-<h2>Step 1: Install osTicket</h2>
-<ol>
-    <li>Download the latest version of <a href="https://osticket.com">osTicket</a>.</li>
-    <li>Install a web server stack (Apache/IIS, MySQL, and PHP).</li>
-    <li>Extract and place osTicket files in the web root directory.</li>
-    <li>Run the osTicket installer via your web browser.</li>
-</ol>
+1. **Install your preferred virtualization software** (VMware Workstation, VirtualBox, or Hyper-V).  
+2. **Create a new Virtual Machine (VM) for Windows Server:**  
+   - Allocate **at least 4GB RAM and 2 CPU cores**.  
+   - Set the virtual disk size to **50GB or more**.  
+   - Mount the **Windows Server ISO** and begin the installation process.  
+3. **Create additional VMs for Windows 10/11 clients** following similar steps.  
 
-<h2>Step 2: Configure MySQL Database</h2>
-<ol>
-    <li>Create a new MySQL database and user.</li>
-    <li>Grant full permissions to the osTicket user.</li>
-    <li>Enter database details during installation.</li>
-</ol>
+---
 
-<h2>Step 3: Enable Active Directory Authentication</h2>
-<ol>
-    <li>Go to osTicket Admin Panel → <strong>Manage → Plugins</strong>.</li>
-    <li>Enable and configure the LDAP Authentication plugin.</li>
-    <li>Enter your domain controller details.</li>
-    <li>Test user authentication with an AD account.</li>
-</ol>
+## 🖥 Step 2: Installing Windows Server and Configuring Basic Settings  
+Once your **Windows Server VM** is up and running:  
 
-<h2>Step 4: Configure Ticketing System</h2>
-<ol>
-    <li>Create help topics and departments.</li>
-    <li>Set user roles and permissions.</li>
-    <li>Test ticket submission and resolution workflow.</li>
-</ol>
+1. Complete the **Windows Server installation** and set a **strong administrator password**.  
+2. **Assign a static IP address** to ensure reliable network connectivity:  
+   - Open **Network and Sharing Center → Change adapter settings**.  
+   - Configure the Ethernet adapter with a manual IP (e.g., `192.168.1.10` for the server).  
+3. **Rename the server** to something meaningful, like `DC01` (Domain Controller 01).  
 
-<h2>Conclusion</h2>
-<p>Integrating osTicket with Active Directory provides a seamless ticketing solution for IT support. With AD authentication, users can log in with their existing credentials, making the system more secure and efficient.</p>
+---
 
+## 🔧 Step 3: Installing Active Directory Domain Services (AD DS)  
+Now, let’s turn this Windows Server into a **Domain Controller**.  
+
+1. Open **Server Manager** and select **Add Roles and Features**.  
+2. Choose **Active Directory Domain Services (AD DS)** and install it.  
+3. Once installed, **promote the server to a domain controller**:  
+   - Select **Add a new forest** and enter a domain name (e.g., `MyLab.local`).  
+   - Set a **Directory Services Restore Mode (DSRM) password** for recovery purposes.  
+   - Complete the setup and **restart the server**.  
+
+---
+
+## 🛠 Step 4: Configuring Active Directory and DNS  
+After the server reboots:  
+
+1. Open **Active Directory Users and Computers (ADUC)**.  
+2. Create **Organizational Units (OUs)** to organize users and computers.  
+3. Add **test user accounts** to simulate real users.  
+
+---
+
+# 🎫 Integrating osTicket with Active Directory  
+Now that Active Directory is set up, let’s integrate **osTicket** to create a help desk system for IT support.  
+
+## 📥 Step 1: Installing osTicket  
+1. Download the latest version of **osTicket** from [osTicket’s official site](https://osticket.com/download).  
+2. Install a **web server stack** such as Apache/IIS, MySQL, and PHP.  
+3. Extract the osTicket files and place them in your **web root directory**.  
+4. Run the **osTicket installer** through your web browser.  
+
+---
+
+## 💾 Step 2: Configuring the MySQL Database  
+1. Open MySQL and create a new **database and user** for osTicket.  
+2. Grant full permissions to the osTicket user.  
+3. Enter the **database details** during the osTicket installation process.  
+
+---
+
+## 🔑 Step 3: Enabling Active Directory Authentication  
+1. In the osTicket Admin Panel, navigate to **Manage → Plugins**.  
+2. Enable and configure the **LDAP Authentication plugin**.  
+3. Enter your **domain controller details** (`DC01` or `MyLab.local`).  
+4. Test authentication using an **Active Directory user account**.  
+
+---
+
+## 🎟 Step 4: Configuring the Ticketing System  
+1. Create **help topics and departments** to categorize IT support requests.  
+2. Set **user roles and permissions** to control access levels.  
+3. Test the **ticket submission and resolution workflow** to ensure smooth operation.  
+
+---
+
+## ✅ Conclusion  
+By integrating **osTicket** with **Active Directory**, you now have a fully functional **IT help desk system** that allows users to log in with their domain credentials and submit support requests. This setup is similar to what you’d find in a real corporate environment, making it an excellent hands-on project for IT professionals looking to gain real-world experience.  
+
+---
+
+💡 **Next Steps:**  
+- Expand your help desk with **custom email notifications**.  
+- Implement **group policies** to control user access further.  
+- Explore **PowerShell automation** to enhance your Active Directory management.  
+
+---
+
+This guide serves as both a **learning tool** and a **practical project** to showcase your IT skills. If you found this helpful, feel free to **fork the repository** and build upon it! 🚀  
